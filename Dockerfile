@@ -1,14 +1,14 @@
-# Use the official OpenJDK base image
-FROM openjdk:17-jdk-alpine
+# Use the official Tomcat base image with Java 11
+FROM tomcat:9.0-jre11
 
-# Set the working directory inside the container
-WORKDIR /app
+# Remove the default ROOT application
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-# Copy the JAR file into the container at /app
-COPY target/mongo_clone-0.0.1-SNAPSHOT.jar /app/app.jar
+# Copy the WAR file into the Tomcat webapps directory with the name 'ROOT.war'
+COPY target/mongo_clone-0.0.1-SNAPSHOT.war /usr/local/tomcat/webapps/ROOT.war
 
-# Expose the port that the application will run on
+# Expose the default Tomcat port
 EXPOSE 9876
 
-# Specify the command to run on container startup
-CMD ["java", "-jar", "app.jar"]
+# Start Tomcat when the container starts
+CMD ["catalina.sh", "run"]
