@@ -14,8 +14,8 @@ import com.klef.REST.More.*;
 
 @RestController
 @RequestMapping("/product")
-@CrossOrigin(origins = "http://localhost:3000/")
-//@CrossOrigin("https://dealsblendr.netlify.app")
+//@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin("https://dealsblendr.netlify.app")
 public class ProductController {
   
   @Autowired
